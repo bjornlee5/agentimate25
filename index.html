@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentimate - Idea to design in seconds</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="stylesheet" href="input-styles.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            --button-gradient: linear-gradient(45deg, #FF6B6B, #7B9FFF);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            padding: 8rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            gap: 4rem;
+        }
+
+        .hero-section {
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            white-space: nowrap;
+            max-width: 100%;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #999;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background: var(--button-gradient);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 2rem;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .demo-section {
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16/9;
+            background: #111;
+            border-radius: 12px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            overflow: hidden;
+        }
+
+        .demo-header {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .demo-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .demo-line {
+            stroke: url(#line-gradient);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .demo-circle {
+            fill: url(#circle-gradient);
+        }
+
+        .floating-dots {
+            position: absolute;
+            inset: 0;
+        }
+
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FF6B6B;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .testimonials-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.1);
+        }
+
+        .testimonial-text {
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            color: #999;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .testimonial-company {
+            color: var(--primary-gradient);
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">agentimate</a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero-section">
+            <h1>Idea to design in seconds.</h1>
+            <p class="subtitle">Your superhuman AI design partner. Start creating for free today.</p>
+            <button class="cta-button">Start Designing</button>
+            <div id="animated-input"></div>
+        </div>
+
+        <section class="testimonials-section">
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"This tool is absolutely mind-blowing! It has cut our design time in half and the quality of output is consistently impressive. The AI understands exactly what we need."</p>
+                    <div class="testimonial-author">
+                        Sarah Chen
+                        <span class="testimonial-company">• Design Lead at Innovate</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I've tried many AI design tools, but this one stands out. The interface is intuitive, and the results are exactly what we need for our client presentations."</p>
+                    <div class="testimonial-author">
+                        Marcus Rodriguez
+                        <span class="testimonial-company">• Product Manager</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Game-changing for our startup. We can now iterate on designs rapidly without compromising on quality. The AI seems to understand our brand perfectly."</p>
+                    <div class="testimonial-author">
+                        Emily Watson
+                        <span class="testimonial-company">• Founder at TechFlow</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The speed and accuracy are unmatched. What used to take days now takes minutes. This has completely transformed our design workflow."</p>
+                    <div class="testimonial-author">
+                        James Kim
+                        <span class="testimonial-company">• Creative Director</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"As a solo developer, this tool feels like having a professional design team at my fingertips. The value for money is incredible."</p>
+                    <div class="testimonial-author">
+                        Alex Thompson
+                        <span class="testimonial-company">• Independent Developer</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The consistency in design quality and the ability to maintain our brand guidelines while generating new designs is impressive. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        Lisa Patel
+                        <span class="testimonial-company">• Brand Manager</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import AnimatedInput from './input-component.js';
+        
+        // Initialize the animated input
+        const inputContainer = document.getElementById('animated-input');
+        new AnimatedInput(inputContainer);
+        
+        // Main animation sequence
+        anime.timeline({
+            easing: 'easeOutExpo',
+        })
+        .add({
+            targets: 'h1',
+            translateY: [20, 0],
+            opacity: [0, 1],
+            duration: 800
+        })
+        .add({
+            targets: '.subtitle',
+            translateY: [20, 0],
+            opacity: [0, 1],
+            duration: 800
+        }, '-=600')
+        .add({
+            targets: '.cta-button',
+            translateY: [20, 0],
+            opacity: [0, 1],
+            duration: 800
+        }, '-=600')
+        .add({
+            targets: '.animated-input-container',
+            translateY: [20, 0],
+            opacity: [0, 1],
+            duration: 800
+        }, '-=400');
+    </script>
+</body>
+</html> 
